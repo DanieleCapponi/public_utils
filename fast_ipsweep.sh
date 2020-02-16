@@ -1,6 +1,7 @@
 #!/bin/bash
 
 gway=$(ip -4 route list 0/0 	| cut -d " " -f3)
+iface=$(ip -4 route list 0/0 | cut -d " " -f5)
 netmsk=$(ifconfig $iface | grep "inet " | sed 's/        /,/g' | sed 's/    /,/g' | sed 's/  /,/g' | sed 's/ /,/g' | cut -d "," -f5)
 if=$(ip -4 route list 0/0 | cut -d " " -f5);
 ip=$(ifconfig ${if} | grep "inet " | cut -d " " -f10)
