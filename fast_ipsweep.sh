@@ -5,7 +5,7 @@ iface=$(ip -4 route list 0/0 | cut -d " " -f5)
 netmsk=$(ifconfig $iface | grep "inet " | sed 's/        /,/g' | sed 's/    /,/g' | sed 's/  /,/g' | sed 's/ /,/g' | cut -d "," -f5)
 if=$(ip -4 route list 0/0 | cut -d " " -f5);
 ip=$(ifconfig ${if} | grep "inet " | cut -d " " -f10)
-network=$(ip -4 route | grep ${ip} | cut -d " " -f1)
+network=$(ip -4 route | grep ${ip} | cut -d " " -f1 | sed 's^default^^g')
 
 netspace=$(echo $network | cut -d "/" -f2)
 netip="$(echo $network | cut -d "/" -f1 | cut -d "." -f 1,2,3)."
